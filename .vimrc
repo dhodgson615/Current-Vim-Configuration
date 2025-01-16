@@ -165,7 +165,7 @@ autocmd FileType java command! Sout call SoutSnippet()
 "Markdown snippets"
 
 function! FormatMarkdownTable()
-  " Get start and end lines of table
+  "Get start and end lines of table"
   let start_line = line('.')
   while getline(start_line) !~ '^\\table$' && start_line > 0
     let start_line -= 1
@@ -176,30 +176,30 @@ function! FormatMarkdownTable()
     let end_line += 1
   endwhile
 
-  " Validate table boundaries
+  "Validate table boundaries"
   if start_line == 0 || end_line > line('$')
     echo "No valid table found!"
     return
   endif
 
-  " Get table content
+  "Get table content"
   let lines = getline(start_line + 1, end_line - 1)
   let table = []
     
-  " Process each line into columns
+  "Process each line into columns"
   for line in lines
-    " Skip empty lines
+    "Skip empty lines"
     if line =~ '^\s*$'
       continue
     endif
-    " Split line by 4 or more spaces
+    "Split line by 4 or more spaces"
     let columns = split(line, '\s\{4,\}')
-    " Trim whitespace from each column
+    "Trim whitespace from each column"
     call map(columns, 'trim(v:val)')
     call add(table, columns)
   endfor
 
-  " Find maximum width for each column
+  "Find maximum width for each column"
   let col_count = max(map(copy(table), 'len(v:val)'))
   let col_widths = repeat([0], col_count)
     
@@ -209,7 +209,7 @@ function! FormatMarkdownTable()
     endfor
   endfor
 
-  " Format table rows
+  "Format table rows"
   let output = []
   let header_sep = '|'
     
@@ -217,7 +217,7 @@ function! FormatMarkdownTable()
     let row = table[i]
     let formatted = '|'
         
-    " Pad each column to match max width
+    "Pad each column to match max width"
     for j in range(col_count)
       let content = get(row, j, '')
       let formatted .= ' ' . printf('%-*s', col_widths[j], content) . ' |'
@@ -232,7 +232,7 @@ function! FormatMarkdownTable()
     endif
   endfor
 
-  " Replace the table content
+  "Replace the table content"
   call setline(start_line + 1, output)
   call deletebufline('%', start_line + len(output) + 1, end_line - 1)
   call append(start_line + len(output), '\endtable')
