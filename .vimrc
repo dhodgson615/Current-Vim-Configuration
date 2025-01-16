@@ -238,5 +238,5 @@ function! FormatMarkdownTable()
   call append(start_line + len(output), '\endtable')
 endfunction
 
-
+"Define commands for Markdown files"
 autocmd FileType markdown command! FormatTable call FormatMarkdownTable()
