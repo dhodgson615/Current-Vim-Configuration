@@ -12,9 +12,9 @@ set foldmethod=indent
 set foldlevel=99
 set foldenable
 set backspace=indent,eol,start
-set history=1000
-set undolevels=1000
-set undoreload=10000
+set history=100000
+set undolevels=100000
+set undoreload=1000000
 set undodir=~/.vim/undo
 set laststatus=2
 set expandtab
