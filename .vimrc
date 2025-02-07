@@ -170,22 +170,18 @@ function! FormatMarkdownTable()
   while getline(start_line) !~ '^\\table$' && start_line > 0
     let start_line -= 1
   endwhile
-    
   let end_line = line('.')
   while getline(end_line) !~ '^\\endtable$' && end_line <= line('$')
     let end_line += 1
   endwhile
-
   "Validate table boundaries"
   if start_line == 0 || end_line > line('$')
     echo "No valid table found!"
     return
   endif
-
   "Get table content"
   let lines = getline(start_line + 1, end_line - 1)
   let table = []
-    
   "Process each line into columns"
   for line in lines
     "Skip empty lines"
@@ -198,25 +194,20 @@ function! FormatMarkdownTable()
     call map(columns, 'trim(v:val)')
     call add(table, columns)
   endfor
-
   "Find maximum width for each column"
   let col_count = max(map(copy(table), 'len(v:val)'))
   let col_widths = repeat([0], col_count)
-    
   for row in table
     for i in range(len(row))
       let col_widths[i] = max([col_widths[i], strlen(row[i])])
     endfor
   endfor
-
   "Format table rows"
   let output = []
   let header_sep = '|'
-    
   for i in range(len(table))
     let row = table[i]
     let formatted = '|'
-        
     "Pad each column to match max width"
     for j in range(col_count)
       let content = get(row, j, '')
@@ -225,13 +216,11 @@ function! FormatMarkdownTable()
         let header_sep .= '-' . repeat('-', col_widths[j]) . '-|'
       endif
     endfor
-        
     call add(output, formatted)
     if i == 0
       call add(output, header_sep)
     endif
   endfor
-
   "Replace the table content"
   call setline(start_line + 1, output)
   call deletebufline('%', start_line + len(output) + 1, end_line - 1)
