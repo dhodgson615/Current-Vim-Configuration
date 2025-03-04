@@ -109,7 +109,6 @@
 
                 " Check if the statusline is supported and either the terminal has more than 2 colors or the GUI is running.
                 if has('statusline') && &t_Co > 2 || has('gui_running')
-
                     "------------------------------------------------------------------------------------------------------------------------------
                     " Define the ruler format (displayed only when the statusline is disabled)
                     " The ruler displays:
@@ -132,7 +131,6 @@
                     let &rulerformat.=" %{wordcount().words} Words"                                " Word count from document
                     let &rulerformat.=" %5.P"                                                      " Percentage through file (5 characters wide)
                     let &rulerformat.=" %*"                                                        " Reset highlighting
-
                     "--------------------------------------------------------------------
                     " Define the statusline function. This function assembles various
                     " segments with different colors and content.
@@ -140,7 +138,6 @@
                     func s:StatusLine()                      " Define statusline function
                         " Clear the current statusline.
                         set statusline=                      " Reset statusline to empty
-
                         "------------------------------------------------------------------------------------------------------------------------------------
                         " Segment 1: Full file path with optional flags (User1 color)
                         " - Limits filename display to ~65 characters.
@@ -154,7 +151,6 @@
                         let &statusline.=" ┃"                                                        " Vertical separator character
                         let &statusline.=" o=%{printf('%-7o', char2nr(getline('.')[col('.') - 1]))}" " Display octal value
                         let &statusline.=" %*"                                                       " Reset color
-
                         "---------------------------------------------------------------------------------------------------
                         " Segment 2: File format and file encoding (User2 color)
                         " - Shows file format and encoding (or '(none)' if not set).
@@ -163,7 +159,6 @@
                         let &statusline.="%2*"                                           " Switch to User2 highlight group
                         let &statusline.=" %{&ff} > %{strlen(&fenc) ? &fenc : '(none)'}" " File format and encoding
                         let &statusline.=" %*"                                           " Reset color
-
                         "------------------------------------------------------------------------
                         " Segment 3: File type (User3 color)
                         " - Displays the file type, limited to 20 characters (22 with spacers).
@@ -172,7 +167,6 @@
                         let &statusline.="%3*"              " Switch to User3 highlight group
                         let &statusline.=" %.20{&filetype}" " Display filetype (max 20 chars)
                         let &statusline.=" %*"              " Reset color
-
                         "--------------------------------------------------------------------------------------------------------
                         " Segment 4: Character info (Default color)
                         " - Shows decimal, hex, and octal values of the character under the cursor.
@@ -190,7 +184,6 @@
                         let &statusline.=" ┃"                                                         " Vertical separator
                         let &statusline.=" o=%{printf('%-7o', char2nr(getline('.')[col('.') - 1]))}"  " Octal character code
                         let &statusline.=" %*"                                                        " Reset color
-
                         "-----------------------------------------------------------
                         " Segment 5: Keymap indicator (User4 color)
                         " - Displays the current keymap.
@@ -198,25 +191,22 @@
                         let &statusline.="%4*"   " Switch to User4 highlight group
                         let &statusline.=" <%k>" " Display current keymap
                         let &statusline.=" %*"   " Reset color
-
                         "--------------------------------------------------------
                         " Right-align the following items using user3 colors.
                         "--------------------------------------------------------
                         let &statusline.="%*%=" " Right-align following content
-
                         "-----------------------------------------------------------------------------------
                         " Append the ruler to the statusline if it is enabled.
                         "-----------------------------------------------------------------------------------
-                        if &ruler                                   " Check if ruler option is enabled
+                        if &ruler
                             let &statusline.=&rulerformat           " Append rulerformat to statusline
                         endif
                     endfunc                                         " End of StatusLine function
-
                     call s:StatusLine()                             " Set initial statusline configuration
                     if has('autocmd')                               " Check if autocommands are available
                         autocmd OptionSet ruler call s:StatusLine() " Update statusline when ruler changes
                     endif
-                endif                                               " End of initial if condition
+                endif
 
 " ==================================================
 " End of Settings
