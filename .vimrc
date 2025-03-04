@@ -107,92 +107,116 @@
         " 8. Custom Status Line
         " -------------------------------
 
+                " Check if the statusline is supported and either the terminal has more than 2 colors or the GUI is running.
                 if has('statusline') && &t_Co > 2 || has('gui_running')
 
-                    " Define the ruler (only shows up when the status line is disabled)
-                    " Ruler contents: byte, line, lines selected, column
-                    "                 page number, words, and percentage
-                    let &rulerformat="%100(%=%*%)" " Set ruler width to 100 characters
-                    let &rulerformat.=" Byte %o/%{getfsize(expand(@%))},"
-                    let &rulerformat.=" Line %{line('v')}-%{line('.')}/%L,"
-                    let &rulerformat.=" L.Sel. %{abs(line('.') - line('v')) + 1},"
-                    let &rulerformat.=" Col %c%V,"
-                    let &rulerformat.=" Pg %(%{winheight(0) ? line('.') / winheight(0) + 1 : 0}%)"
-                    let &rulerformat.=" /%(%{winheight(0) ? line('$') / winheight(0) + 1 : 0}%),"
-                    let &rulerformat.=" %{wordcount().words} Words"
-                    let &rulerformat.=" %5.P"
-                    let &rulerformat.=" %*"
+                    "------------------------------------------------------------------------------------------------------------------------------
+                    " Define the ruler format (displayed only when the statusline is disabled)
+                    " The ruler displays:
+                    "   - A fixed width of 100 characters.
+                    "   - Byte count and file size.
+                    "   - Starting and current line numbers, and total lines.
+                    "   - Number of lines selected.
+                    "   - Current column (and virtual column).
+                    "   - Page numbers (current and total).
+                    "   - Word count.
+                    "   - Percentage through the file.
+                    "------------------------------------------------------------------------------------------------------------------------------
+                    let &rulerformat="%100(%=%*%)"                                                 " Set ruler width to 100 characters
+                    let &rulerformat.=" Byte %o/%{getfsize(expand(@%))},"                          " Current byte position and total file size
+                    let &rulerformat.=" Line %{line('v')}-%{line('.')}/%L,"                        " Visual start line, current line, total lines
+                    let &rulerformat.=" L.Sel. %{abs(line('.') - line('v')) + 1},"                 " Number of selected lines
+                    let &rulerformat.=" Col %c%V,"                                                 " Current column and virtual column
+                    let &rulerformat.=" Pg %(%{winheight(0) ? line('.') / winheight(0) + 1 : 0}%)" " Current page number
+                    let &rulerformat.=" /%(%{winheight(0) ? line('$') / winheight(0) + 1 : 0}%),"  " Total pages
+                    let &rulerformat.=" %{wordcount().words} Words"                                " Word count from document
+                    let &rulerformat.=" %5.P"                                                      " Percentage through file (5 characters wide)
+                    let &rulerformat.=" %*"                                                        " Reset highlighting
 
-                    " Define the statusline
-                    func s:StatusLine()
+                    "--------------------------------------------------------------------
+                    " Define the statusline function. This function assembles various
+                    " segments with different colors and content.
+                    "--------------------------------------------------------------------
+                    func s:StatusLine()                      " Define statusline function
+                        " Clear the current statusline.
+                        set statusline=                      " Reset statusline to empty
 
-                        " Clear current status line
-                        set statusline=
+                        "------------------------------------------------------------------------------------------------------------------------------------
+                        " Segment 1: Full file path with optional flags (User1 color)
+                        " - Limits filename display to ~65 characters.
+                        " - Note: The '%(%m%r%)' adds an extra 0-7 characters.
+                        "------------------------------------------------------------------------------------------------------------------------------------
+                        let &statusline.="%*"                                                        " Switch to default color
+                        let &statusline.="%<"                                                        " Truncate statusbar lines here
+                        let &statusline.=" d=%-7b"                                                   " Display decimal value of current character (7 width)
+                        let &statusline.=" ┃"                                                        " Vertical separator character
+                        let &statusline.=" h=%-6B"                                                   " Display hex value of current character (6 width)
+                        let &statusline.=" ┃"                                                        " Vertical separator character
+                        let &statusline.=" o=%{printf('%-7o', char2nr(getline('.')[col('.') - 1]))}" " Display octal value
+                        let &statusline.=" %*"                                                       " Reset color
 
-                        " Set color to User1, add full file path with optional flags.
-                        " An arbitrary length of 65 characters for the filename is good
-                        " enough. Most filesystem filenames support 255 ASCII characters.
-                        " Note that technically the filename includes the file extension string.
-                        " The part `%(%m%r%)` takes up an extra 0-7 characters.
-                        " The segment totals 65-72 characters (67-74 with spacers included).
-                        let &statusline.="%*"
-                        let &statusline.="%<" " Truncate statusbar lines here.
-                        let &statusline.=" d=%-7b"
-                        let &statusline.=" ┃"
-                        let &statusline.=" h=%-6B"
-                        let &statusline.=" ┃"
-                        let &statusline.=" o=%{printf('%-7o', char2nr(getline('.')[col('.') - 1]))}"
-                        let &statusline.=" %*"
+                        "---------------------------------------------------------------------------------------------------
+                        " Segment 2: File format and file encoding (User2 color)
+                        " - Shows file format and encoding (or '(none)' if not set).
+                        " - (String length analysis work in progress)
+                        "---------------------------------------------------------------------------------------------------
+                        let &statusline.="%2*"                                           " Switch to User2 highlight group
+                        let &statusline.=" %{&ff} > %{strlen(&fenc) ? &fenc : '(none)'}" " File format and encoding
+                        let &statusline.=" %*"                                           " Reset color
 
-                        " Set color to User2, add file format, then file encoding
-                        " (String length analysis WIP)
-                        let &statusline.="%2*"
-                        let &statusline.=" %{&ff} > %{strlen(&fenc) ? &fenc : '(none)'}"
-                        let &statusline.=" %*"
+                        "------------------------------------------------------------------------
+                        " Segment 3: File type (User3 color)
+                        " - Displays the file type, limited to 20 characters (22 with spacers).
+                        " - This accounts for long filetype names like 'upstreaminstalllog'.
+                        "------------------------------------------------------------------------
+                        let &statusline.="%3*"              " Switch to User3 highlight group
+                        let &statusline.=" %.20{&filetype}" " Display filetype (max 20 chars)
+                        let &statusline.=" %*"              " Reset color
 
-                        " Set color to User3, add file type if available
-                        " Because the longest filetype name is `upstreaminstalllog`, it seems
-                        " like the string limit and segment length should be 20 characters
-                        " (22 with spacers included).
-                        let &statusline.="%3*"
-                        let &statusline.=" %.20{&filetype}"
-                        let &statusline.=" %*"
+                        "--------------------------------------------------------------------------------------------------------
+                        " Segment 4: Character info (Default color)
+                        " - Shows decimal, hex, and octal values of the character under the cursor.
+                        " - Notes:
+                        "     * Maximum Unicode value is U+10FFFF (decimal 1114111).
+                        "     * Maximum octal is 4177777.
+                        "     * With octal, segment length is 34 characters (36 with spacers).
+                        "     * Without octal, segment length is 22 characters (24 with spacers).
+                        "     * Total segment length is either 34 or 56 characters (36 or 58 with spacers).
+                        "--------------------------------------------------------------------------------------------------------
+                        let &statusline.="%*"                                                         " Switch to default color
+                        let &statusline.=" d=%-7b"                                                    " Decimal character code
+                        let &statusline.=" ┃"                                                         " Vertical separator
+                        let &statusline.=" h=%-6B"                                                    " Hex character code
+                        let &statusline.=" ┃"                                                         " Vertical separator
+                        let &statusline.=" o=%{printf('%-7o', char2nr(getline('.')[col('.') - 1]))}"  " Octal character code
+                        let &statusline.=" %*"                                                        " Reset color
 
-                        " Set color to Default, add dec, hex and octal of selected character. Note
-                        " that U+10FFFF (or dec 1114111) is the maximum range of Unicode. And for
-                        " octal it is 4177777. Those measure 34 fixed characters long. With octal
-                        " off, it measures 22 fixed characters long. Total segment length is either
-                        " 34 or 56 fixed characters long. (36 or 58 with spacers included).
-                        let &statusline.="%*"
-                        let &statusline.=" d=%-7b"
-                        let &statusline.=" ┃"
-                        let &statusline.=" h=%-6B"
-                        let &statusline.=" ┃"
-                        let &statusline.=" o=%{printf('%-7o', char2nr(getline('.')[col('.') - 1]))}"
-                        let &statusline.=" %*"
+                        "-----------------------------------------------------------
+                        " Segment 5: Keymap indicator (User4 color)
+                        " - Displays the current keymap.
+                        "-----------------------------------------------------------
+                        let &statusline.="%4*"   " Switch to User4 highlight group
+                        let &statusline.=" <%k>" " Display current keymap
+                        let &statusline.=" %*"   " Reset color
 
-                        " Set color to User4, add show keymap
-                        let &statusline.="%4*"
-                        let &statusline.=" <%k>"
-                        let &statusline.=" %*"
+                        "--------------------------------------------------------
+                        " Right-align the following items using user3 colors.
+                        "--------------------------------------------------------
+                        let &statusline.="%*%=" " Right-align following content
 
-                        " Separation point for right aligned items (using user3 colors)
-                        let &statusline.="%*%="
-
-                        " Add the ruler to the status bar when the ruler is enabled
-                        if &ruler
-                            let &statusline.=&rulerformat
+                        "-----------------------------------------------------------------------------------
+                        " Append the ruler to the statusline if it is enabled.
+                        "-----------------------------------------------------------------------------------
+                        if &ruler                                   " Check if ruler option is enabled
+                            let &statusline.=&rulerformat           " Append rulerformat to statusline
                         endif
-                    endfunc
+                    endfunc                                         " End of StatusLine function
 
-                    " Initialize the status line
-                    call s:StatusLine()
-
-                    " Update the statusline when the ruler variable is toggled
-                    if has('autocmd')
-                        autocmd OptionSet ruler call s:StatusLine()
+                    call s:StatusLine()                             " Set initial statusline configuration
+                    if has('autocmd')                               " Check if autocommands are available
+                        autocmd OptionSet ruler call s:StatusLine() " Update statusline when ruler changes
                     endif
-                endif
+                endif                                               " End of initial if condition
 
 " ==================================================
 " End of Settings
