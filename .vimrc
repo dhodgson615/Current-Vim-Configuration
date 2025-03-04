@@ -8,296 +8,100 @@
         " -------------------------------
 
                 set nocompatible                         " Use Vim defaults
-
-
-
                 set encoding=utf-8                       " Set default encoding to UTF-8
-
-
-
                 set fileencoding=utf-8                   " Set file encoding to UTF-8
-
-
-
-                set title                                " Show filename in terminal
-                                                         " title bar
-
-
+                set title                                " Show filename in terminal title bar
                 set history=10000                        " Increase command history size
-
-
-
-                set autoread                             " Reload file automatically if
-                                                         " changed outside Vim
-
-
-                set autowrite                            " Automatically save when
-                                                         " switching buffers
-
-
-                set autowriteall                         " Write all buffers when
-                                                         " quitting
-
-
-                set hidden                               " Allow switching buffers
-                                                         " without saving
-
-
-                set backspace=indent,eol,start           " Allow backspacing over
-                                                         " autoindent, line breaks, etc.
-
-
-                set undolevels=10000                     " Maximum number of changes
-                                                         " that can be undone
-
-
-                set undoreload=10000                     " Maximum number of lines to
-                                                         " save for undo on reload
-
-
+                set autoread                             " Reload file automatically if changed outside Vim
+                set autowrite                            " Automatically save when switching buffers
+                set autowriteall                         " Write all buffers when quitting
+                set hidden                               " Allow switching buffers without saving
+                set backspace=indent,eol,start           " Allow backspacing over autoindent, line breaks, etc.
+                set undolevels=10000                     " Maximum number of changes that can be undone
+                set undoreload=10000                     " Maximum number of lines to save for undo on reload
                 set completeopt=menuone,longest,preview  " Set completion options
-
-
 
         " -------------------------------
         " 2. User Interface Enhancements
         " -------------------------------
 
                 syntax enable                                                       " Enable syntax highlighting
-
-
-
                 set number                                                          " Show absolute line numbers
-
-
-
-                set relativenumber                                                  " Show relative line numbers for
-                                                                                    " navigation
-
-
-                set ruler                                                           " Always display the cursor
-                                                                                    " position
-
-
+                set relativenumber                                                  " Show relative line numbers for navigation
+                set ruler                                                           " Always display the cursor position
                 set laststatus=2                                                    " Always show the status line
-
-
-
-                set showcmd                                                         " Display incomplete commands in
-                                                                                    " the status line
-
-
-                set showmatch                                                       " Highlight matching
-                                                                                    " brackets/parentheses
-
-
-                set cmdheight=2                                                     " Increase command-line height
-                                                                                    " to 2 lines
-
-
-                set scrolloff=20                                                    " Keep 20 lines visible
-                                                                                    " above/below the cursor
-
-
-                set sidescrolloff=15                                                " Keep 15 columns visible to the
-                                                                                    " left/right of the cursor
-
-
-                set showmode                                                        " Show current mode
-                                                                                    " (e.g., -- INSERT --)
-
-
-                set showbreak=++                                                    " Display ++ at the end of the
-                                                                                    " window when lines wrap
-
-
+                set showcmd                                                         " Display incomplete commands in the status line
+                set showmatch                                                       " Highlight matching brackets/parentheses
+                set cmdheight=2                                                     " Increase command-line height to 2 lines
+                set scrolloff=20                                                    " Keep 20 lines visible above/below the cursor
+                set sidescrolloff=15                                                " Keep 15 columns visible to the left/right of the cursor
+                set showmode                                                        " Show current mode (e.g., -- INSERT --)
+                set showbreak=++                                                    " Display ++ at the end of the window when lines wrap
                 set list                                                            " Show invisible characters
-                                                                                    " (e.g., tabs, line endings)
-
-
                 set listchars=tab:▸.,trail:·,extends:>,precedes:<,nbsp:␣,conceal:·, " Customize invisible characters
-
-
-
-            " Line wrapping and search wrap-around
-
                 set wrap                                                            " Visually wrap long lines
-
-
-
-                set wrapscan                                                        " Allow searches to wrap around
-                                                                                    " the file
-
-
+                set wrapscan                                                        " Allow searches to wrap around the file
                 set linebreak                                                       " Break lines at word boundaries
-
-
-
-            " Color and highlighting
-
                 colorscheme desert                                                  " Set preferred color scheme
-
-
-
                 highlight Comment cterm=italic                                      " Display comments in italic
-
-
-
-                set colorcolumn=80                                                  " Highlight the 80th column as
-                                                                                    " a guide
-
-
+                set colorcolumn=80                                                  " Highlight the 80th column as a guide
                 set cursorline                                                      " Highlight the current line
-
-
 
         " -------------------------------
         " 3. Mouse, Clipboard & Terminal
         " -------------------------------
 
                 set mouse=a               " Enable mouse in all modes
-
-
-
-                set clipboard=unnamedplus " Use system clipboard for
-                                          " copy-paste
-
-
-                set ttyfast               " Optimize for fast terminal
-                                          " connections
-
-
-                set ttymouse=xterm2       " Enable mouse support in
-                                          " terminal
-
-
+                set clipboard=unnamedplus " Use system clipboard for copy-paste
+                set ttyfast               " Optimize for fast terminal connections
+                set ttymouse=xterm2       " Enable mouse support in terminal
 
         " -------------------------------
         " 4. Search and Command Options
         " -------------------------------
 
-                set ignorecase " Case-insensitive searching
-
-
-
-                set smartcase  " Enable case-sensitive search
-                               " if uppercase is used
-
-
-                set incsearch  " Show incremental search
-                               " matches as you type
-
-
-                set hlsearch   " Highlight all search matches
-
-
-
-            " Enhanced command-line completion
-
-                set wildmenu                   " Enable the enhanced
-                                               " command-line completion
-
-
+                set ignorecase                 " Case-insensitive searching
+                set smartcase                  " Enable case-sensitive search if uppercase is used
+                set incsearch                  " Show incremental search matches as you type
+                set hlsearch                   " Highlight all search matches
+                set wildmenu                   " Enable the enhanced command-line completion
                 set wildmode=longest,list,full " Configure wildmenu behavior
-
-
 
         " -------------------------------
         " 5. Indentation and Formatting
         " -------------------------------
 
-                set autoindent   " Continue indentation on new
-                                 " lines
-
-
-                set smartindent  " Intelligent indentation for
-                                 " code
-
-
+                set autoindent   " Continue indentation on new lines
+                set smartindent  " Intelligent indentation for code
                 set smarttab     " Make tab operations smarter
-
-
-
                 set expandtab    " Convert tabs to spaces
-
-
-
                 set tabstop=2    " A tab is displayed as 2 spaces
-
-
-
-                set shiftwidth=2 " Indentation level for
-                                 " autoindent is 2 spaces
-
-
+                set shiftwidth=2 " Indentation level for autoindent is 2 spaces
                 set linebreak    " Break lines at word boundaries
-
-
 
         " -------------------------------
         " 6. Code Folding
         " -------------------------------
 
-                set foldmethod=indent " Fold code based on indentation
-                                      " level
-
-
-                set foldlevel=99      " Open most folds by default
-                                      " (reduce for more folding)
-
-
+                set foldmethod=indent " Fold code based on indentation level
+                set foldlevel=99      " Open most folds by default (reduce for more folding)
                 set foldenable        " Enable folding
-
-
-
-                set foldmethod=marker " Fold based on markers
-                                      " (e.g., { and })
-
-
-                set foldmarker={,}    " Custom fold markers for code
-                                      " folding
-
-
+                set foldmethod=marker " Fold based on markers (e.g., { and })
+                set foldmarker={,}    " Custom fold markers for code folding
 
         " -------------------------------
         " 7. Undo, Backup, and Swap Files
         " -------------------------------
 
                 set undolevels=1000         " Increase number of undo levels
-
-
-
-                set undoreload=10000        " Preserve undo history on
-                                            " reload
-
-
-                set undodir=~/.vim/undo     " Directory to store undo
-                                            " history
-
-
+                set undoreload=10000        " Preserve undo history on reload
+                set undodir=~/.vim/undo     " Directory to store undo history
                 set undofile                " Save undo history to a file
-
-
-
                 set backup                  " Enable backup files
-
-
-
                 set backupdir=~/.vim/backup " Directory for backup files
-
-
-
-                set writebackup             " Write backups before
-                                            " overwriting files
-
-
-                set backupcopy=yes          " Copy files to backup directory
-                                            " instead of renaming
-
-
+                set writebackup             " Write backups before overwriting files
+                set backupcopy=yes          " Copy files to backup directory instead of renaming
                 set backupext=.bak          " Set backup file extension
-
-
 
         " -------------------------------
         " 8. Custom Status Line
