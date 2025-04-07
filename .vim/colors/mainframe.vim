@@ -28,12 +28,12 @@ highlight CursorColumn guibg=#001100 ctermbg=0              " Matching current c
 highlight Visual       guibg=#003300 ctermbg=22             " Dark green for visual selection
 
 " Menus & Status Bar
-highlight Pmenu        guibg=#001100 ctermbg=0                                      " Dark background for popup menus
+highlight Pmenu        guibg=#001100 ctermbg=0   " Dark background for popup menus
 highlight PmenuSel     guibg=#004400 ctermbg=22  " Brighter green for selected menu items
 highlight StatusLine   guibg=#001100 ctermbg=0   " Status line matching the overall theme
 highlight VertSplit    guifg=#003300 ctermfg=22  " Subtle green split lines
 
 " Helper Elements
-highlight NonText      guifg=#003300 guibg=NONE ctermfg=22                          " Dimmed markers for non-text characters
-highlight Folded       guifg=#006400 guibg=NONE ctermfg=22                          " Folded text markers in dark green
-highlight SpecialKey   guifg=#003300 guibg=NONE ctermfg=22                          " Dim special keys
+highlight NonText      guifg=#003300 guibg=NONE ctermfg=22  " Dimmed markers for non-text characters
+highlight Folded       guifg=#006400 guibg=NONE ctermfg=22  " Folded text markers in dark green
+highlight SpecialKey   guifg=#003300 guibg=NONE ctermfg=22  " Dim special keys
