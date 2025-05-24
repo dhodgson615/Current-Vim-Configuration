@@ -1,414 +1,159 @@
-" ==================================================
-" Vim Configuration File (.vimrc)
-" ==================================================
-
-        " -------------------------------
-        " 1. Basic Settings
-        " -------------------------------
-
-                set nocompatible                         " Use Vim defaults
-
-
-
-                set encoding=utf-8                       " Set default encoding to UTF-8
-
-
-
-                set fileencoding=utf-8                   " Set file encoding to UTF-8
-
-
-
-                set title                                " Show filename in terminal
-                                                         " title bar
-
-
-                set history=10000                        " Increase command history size
-
-
-
-                set autoread                             " Reload file automatically if
-                                                         " changed outside Vim
-
-
-                set autowrite                            " Automatically save when
-                                                         " switching buffers
-
-
-                set autowriteall                         " Write all buffers when
-                                                         " quitting
-
-
-                set hidden                               " Allow switching buffers
-                                                         " without saving
-
-
-                set backspace=indent,eol,start           " Allow backspacing over
-                                                         " autoindent, line breaks, etc.
-
-
-                set undolevels=10000                     " Maximum number of changes
-                                                         " that can be undone
-
-
-                set undoreload=10000                     " Maximum number of lines to
-                                                         " save for undo on reload
-
-
-                set completeopt=menuone,longest,preview  " Set completion options
-
-
-
-        " -------------------------------
-        " 2. User Interface Enhancements
-        " -------------------------------
-
-                syntax enable                                                       " Enable syntax highlighting
-
-
-
-                set number                                                          " Show absolute line numbers
-
-
-
-                set relativenumber                                                  " Show relative line numbers for
-                                                                                    " navigation
-
-
-                set ruler                                                           " Always display the cursor
-                                                                                    " position
-
-
-                set laststatus=2                                                    " Always show the status line
-
-
-
-                set showcmd                                                         " Display incomplete commands in
-                                                                                    " the status line
-
-
-                set showmatch                                                       " Highlight matching
-                                                                                    " brackets/parentheses
-
-
-                set cmdheight=2                                                     " Increase command-line height
-                                                                                    " to 2 lines
-
-
-                set scrolloff=20                                                    " Keep 20 lines visible
-                                                                                    " above/below the cursor
-
-
-                set sidescrolloff=15                                                " Keep 15 columns visible to the
-                                                                                    " left/right of the cursor
-
-
-                set showmode                                                        " Show current mode
-                                                                                    " (e.g., -- INSERT --)
-
-
-                set showbreak=\ \ \ \ \ \ \ \                                       " Display spaces at the end of
-                                                                                    " the window when lines wrap
-
-
-                set list                                                            " Show invisible characters
-                                                                                    " (e.g., tabs, line endings)
-
-
-                set listchars=tab:▸.,trail:·,extends:>,precedes:<,nbsp:␣,conceal:·, " Customize invisible characters
-
-
-
-            " Line wrapping and search wrap-around
-
-                set wrap                                                            " Visually wrap long lines
-
-
-
-                set wrapscan                                                        " Allow searches to wrap around
-                                                                                    " the file
-
-
-                set linebreak                                                       " Break lines at word boundaries
-
-
-
-            " Color and highlighting
-
-                colorscheme purplish                                                " Set preferred color scheme
-
-
-
-                highlight Comment cterm=italic                                      " Display comments in italic
-
-
-
-                set colorcolumn=80                                                  " Highlight the 80th column as
-                                                                                    " a guide
-
-
-                set cursorline                                                      " Highlight the current line
-
-
-
-        " -------------------------------
-        " 3. Mouse, Clipboard & Terminal
-        " -------------------------------
-
-                set mouse=a               " Enable mouse in all modes
-
-
-
-                set clipboard=unnamedplus " Use system clipboard for
-                                          " copy-paste
-
-
-                set ttyfast               " Optimize for fast terminal
-                                          " connections
-
-
-                set ttymouse=xterm2       " Enable mouse support in
-                                          " terminal
-
-
-
-        " -------------------------------
-        " 4. Search and Command Options
-        " -------------------------------
-
-                set ignorecase " Case-insensitive searching
-
-
-
-                set smartcase  " Enable case-sensitive search
-                               " if uppercase is used
-
-
-                set incsearch  " Show incremental search
-                               " matches as you type
-
-
-                set hlsearch   " Highlight all search matches
-
-
-
-            " Enhanced command-line completion
-
-                set wildmenu                   " Enable the enhanced
-                                               " command-line completion
-
-
-                set wildmode=longest,list,full " Configure wildmenu behavior
-
-
-
-        " -------------------------------
-        " 5. Indentation and Formatting
-        " -------------------------------
-
-                set autoindent   " Continue indentation on new
-                                 " lines
-
-
-                set smartindent  " Intelligent indentation for
-                                 " code
-
-
-                set smarttab     " Make tab operations smarter
-
-
-
-                set expandtab    " Convert tabs to spaces
-
-
-
-                set tabstop=2    " A tab is displayed as 2 spaces
-
-
-
-                set shiftwidth=2 " Indentation level for
-                                 " autoindent is 2 spaces
-
-
-                set linebreak    " Break lines at word boundaries
-
-
-
-        " -------------------------------
-        " 6. Code Folding
-        " -------------------------------
-
-                set foldmethod=indent " Fold code based on indentation
-                                      " level
-
-
-                set foldlevel=99      " Open most folds by default
-                                      " (reduce for more folding)
-
-
-                set foldenable        " Enable folding
-
-
-
-                set foldmethod=marker " Fold based on markers
-                                      " (e.g., { and })
-
-
-                set foldmarker={,}    " Custom fold markers for code
-                                      " folding
-
-
-
-        " -------------------------------
-        " 7. Undo, Backup, and Swap Files
-        " -------------------------------
-
-                set undolevels=1000         " Increase number of undo levels
-
-
-
-                set undoreload=10000        " Preserve undo history on
-                                            " reload
-
-
-                set undodir=~/.vim/undo     " Directory to store undo
-                                            " history
-
-
-                set undofile                " Save undo history to a file
-
-
-
-                set backup                  " Enable backup files
-
-
-
-                set backupdir=~/.vim/backup " Directory for backup files
-
-
-
-                set writebackup             " Write backups before
-                                            " overwriting files
-
-
-                set backupcopy=yes          " Copy files to backup directory
-                                            " instead of renaming
-
-
-                set backupext=.bak          " Set backup file extension
-
-
-
-        " -------------------------------
-        " 8. Custom Status Line
-        " -------------------------------
-
-                " Check if the statusline is supported and either the
-                " terminal has more than 2 colors or the GUI is running.
-                if has('statusline') && &t_Co > 2 || has('gui_running')
-
-                    "------------------------------------------------------------------------------------------------------------------------------
-                    " Define the ruler format (displayed only when the statusline is disabled)
-                    " The ruler displays:
-                    "   - A fixed width of 100 characters.
-                    "   - Byte count and file size.
-                    "   - Starting and current line numbers, and total lines.
-                    "   - Number of lines selected.
-                    "   - Current column (and virtual column).
-                    "   - Page numbers (current and total).
-                    "   - Word count.
-                    "   - Percentage through the file.
-                    "------------------------------------------------------------------------------------------------------------------------------
-                    let &rulerformat="%100(%=%*%)"                                                 " Set ruler width to 100 characters
-                    let &rulerformat.=" Byte %o/%{getfsize(expand(@%))},"                          " Current byte position and total file size
-                    let &rulerformat.=" Line %{line('.')}/%L,"                                     " Current line number / total lines
-                    "let &rulerformat.=" L.Sel. %{abs(line('.') - line('v')) + 1},"                 " Number of selected lines
-                    let &rulerformat.=" Col %c%V,"                                                 " Current column and virtual column
-                    let &rulerformat.=" Pg %(%{winheight(0) ? line('.') / winheight(0) + 1 : 0}%)" " Current page number
-                    let &rulerformat.=" /%(%{winheight(0) ? line('$') / winheight(0) + 1 : 0}%),"  " Total pages
-                    let &rulerformat.=" %{wordcount().words} Words"                                " Word count from document
-                    let &rulerformat.=" %5.P"                                                      " Percentage through file (5 characters wide)
-                    let &rulerformat.=" %*"                                                        " Reset highlighting
-
-                    "--------------------------------------------------------------------
-                    " Define the statusline function. This function assembles various
-                    " segments with different colors and content.
-                    "--------------------------------------------------------------------
-                    func s:StatusLine()                      " Define statusline function
-                        " Clear the current statusline.
-                        set statusline=                      " Reset statusline to empty
-
-                        "------------------------------------------------------------------------------------------------------------------------------------
-                        " Segment 1: Full file path with optional flags (User1 color)
-                        " - Limits filename display to ~65 characters.
-                        " - Note: The '%(%m%r%)' adds an extra 0-7 characters.
-                        "------------------------------------------------------------------------------------------------------------------------------------
-                        let &statusline.="%*"                                                        " Switch to default color
-                        let &statusline.="%<"                                                        " Truncate statusbar lines here
-                        "let &statusline.=" d=%-6b"                                                   " Display decimal value of current character (6 width)
-                        "let &statusline.=" ┃"                                                        " Vertical separator character
-                        "let &statusline.=" h=%-6B"                                                   " Display hex value of current character (6 width)
-                        "let &statusline.=" ┃"                                                        " Vertical separator character
-                        "let &statusline.=" o=%{printf('%-6o', char2nr(getline('.')[col('.') - 1]))}" " Display octal value
-                        "let &statusline.=" %*"                                                       " Reset color
-
-                        "---------------------------------------------------------------------------------------------------
-                        " Segment 2: File format and file encoding (User2 color)
-                        " - Shows file format and encoding (or '(none)' if not set).
-                        " - (String length analysis work in progress)
-                        "---------------------------------------------------------------------------------------------------
-                        let &statusline.="%*"                                            " Switch to default highlight group
-                        let &statusline.=" %{&ff} > %{strlen(&fenc) ? &fenc : '(none)'}" " File format and encoding
-                        let &statusline.=" %*"                                           " Reset color
-
-                        "------------------------------------------------------------------------
-                        " Segment 3: File type (User3 color)
-                        " - Displays the file type, limited to 20 characters (22 with spacers).
-                        " - This accounts for long filetype names like 'upstreaminstalllog'.
-                        "------------------------------------------------------------------------
-                        let &statusline.="%*"               " Switch to default highlight group
-                        let &statusline.=" %.20{&filetype}" " Display filetype (max 20 chars)
-                        let &statusline.=" %*"              " Reset color
-
-                        "--------------------------------------------------------------------------------------------------------
-                        " Segment 4: Character info (Default color)
-                        " - Shows decimal, hex, and octal values of the character under the cursor.
-                        " - Notes:
-                        "     * Maximum Unicode value is U+10FFFF (decimal 1114111).
-                        "     * Maximum octal is 4177777.
-                        "     * With octal, segment length is 34 characters (36 with spacers).
-                        "     * Without octal, segment length is 22 characters (24 with spacers).
-                        "     * Total segment length is either 34 or 56 characters (36 or 58 with spacers).
-                        "--------------------------------------------------------------------------------------------------------
-                        let &statusline.="%*"                                                         " Switch to default color
-                        let &statusline.=" d=%-2b"                                                    " Decimal character code
-                        "let &statusline.=" ┃"                                                         " Vertical separator
-                        let &statusline.=" 0x%-2B"                                                    " Hex character code
-                        "let &statusline.=" ┃"                                                         " Vertical separator
-                        let &statusline.=" 0%{printf('%-2o', char2nr(getline('.')[col('.') - 1]))}"  " Octal character code
-                        "let &statusline.=" %*"                                                        " Reset color
-
-                        "--------------------------------------------------------
-                        " Right-align the following items using user3 colors.
-                        "--------------------------------------------------------
-                        let &statusline.="%*%=" " Right-align following content
-
-                        "-----------------------------------------------------------------------------------
-                        " Append the ruler to the statusline if it is enabled.
-                        "-----------------------------------------------------------------------------------
-                        if &ruler                                   " Check if ruler option is enabled
-                            let &statusline.=&rulerformat           " Append rulerformat to statusline
-                        endif
-                    endfunc                                         " End of StatusLine function
-
-                    call s:StatusLine()                             " Set initial statusline configuration
-                    if has('autocmd')                               " Check if autocommands are available
-                        autocmd OptionSet ruler call s:StatusLine() " Update statusline when ruler changes
-                    endif
-                endif                                               " End of initial if condition
-
-" ==================================================
-" End of Settings
-" ==================================================
+set nocompatible
+set encoding=utf-8
+set fileencoding=utf-8
+set title
+set history=10000
+set autoread
+set autowrite
+set autowriteall
+set hidden
+set backspace=indent,eol,start
+set undolevels=10000
+set undoreload=10000
+set completeopt=menuone,longest,preview
+syntax enable
+set number
+set relativenumber
+set ruler
+set laststatus=2
+set showcmd
+set showmatch
+set cmdheight=2
+set scrolloff=20
+set sidescrolloff=15
+set showmode
+set showbreak=\ \ \ \ \ \ \ \ 
+set list
+set listchars=tab:▸.,trail:·,extends:>,precedes:<,nbsp:␣,conceal:·,
+set wrap
+set wrapscan
+set linebreak
+colorscheme darkmath
+highlight Comment cterm=italic "Note: this overrides the colorscheme default
+set colorcolumn=80
+set cursorline
+set mouse=a
+set clipboard=unnamedplus
+set ttyfast
+set ttymouse=xterm2
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set wildmenu
+set wildmode=longest,list,full
+set autoindent
+set smartindent
+set smarttab
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set linebreak
+set foldmethod=indent
+set foldlevel=99
+set foldenable
+set foldmethod=marker
+set foldmarker={,}
+set undolevels=10000
+set undoreload=10000
+set undodir=~/.vim/undo
+set undofile
+set backup
+set backupdir=~/.vim/backup
+set writebackup
+set backupcopy=yes
+set backupext=.bak
+
+" Check if the statusline is supported and either the terminal has more than 2
+" colors or the GUI is running.
+if has('statusline') && &t_Co > 2 || has('gui_running')
+  "----------------------------------------------------------------------------
+  " Define the ruler format (displayed only when the statusline is disabled).
+  " The ruler displays:
+  "   - A fixed width of 100 characters.
+  "   - Byte count and file size.
+  "   - Starting and current line numbers, and total lines.
+  "   - Number of lines selected.
+  "   - Current column (and virtual column).
+  "   - Page numbers (current and total).
+  "   - Word count.
+  "   - Percentage through the file.
+  "----------------------------------------------------------------------------
+  let &rulerformat="%100(%=%*%)"                                                 " Set ruler width to 100 characters
+  let &rulerformat.=" Byte %o/%{getfsize(expand(@%))},"                          " Current byte position and total file size
+  let &rulerformat.=" Line %{line('.')}/%L,"                                     " Current line number / total lines
+  let &rulerformat.=" Col %c%V,"                                                 " Current column and virtual column
+  let &rulerformat.=" Pg %(%{winheight(0) ? line('.') / winheight(0) + 1 : 0}%)" " Current page number
+  let &rulerformat.=" /%(%{winheight(0) ? line('$') / winheight(0) + 1 : 0}%),"  " Total pages
+  let &rulerformat.=" %{wordcount().words} Words"                                " Word count from document
+  let &rulerformat.=" %5.P"                                                      " Percentage through file (5 characters wide)
+  let &rulerformat.=" %*"                                                        " Reset highlighting
+  "----------------------------------------------------------------------------
+  " Define the statusline function. This function assembles various segments
+  " with different colors and content.
+  "----------------------------------------------------------------------------
+  func s:StatusLine()                      " Define statusline function
+    set statusline=                      " Reset statusline to empty
+    "--------------------------------------------------------------------------
+    " Segment 1: Full file path with optional flags (User1 color)
+    " - Limits filename display to ~65 characters.
+    " - Note: The '%(%m%r%)' adds an extra 0-7 characters.
+    "--------------------------------------------------------------------------
+    let &statusline.="%*"                                                         " Switch to default color
+    let &statusline.="%<"                                                         " Truncate statusbar lines here
+    "let &statusline.=" d=%-6b"                                                   " Display decimal value of current character (6 width)
+    "let &statusline.=" ┃"                                                        " Vertical separator character
+    "let &statusline.=" h=%-6B"                                                   " Display hex value of current character (6 width)
+    "let &statusline.=" ┃"                                                        " Vertical separator character
+    "let &statusline.=" o=%{printf('%-6o', char2nr(getline('.')[col('.') - 1]))}" " Display octal value
+    "let &statusline.=" %*"                                                       " Reset color
+    "--------------------------------------------------------------------------
+    " Segment 2: File format and file encoding (User2 color)
+    " - Shows file format and encoding (or '(none)' if not set).
+    " - (String length analysis work in progress)
+    "--------------------------------------------------------------------------
+    let &statusline.="%*"                                            " Switch to default highlight group
+    let &statusline.=" %{&ff} > %{strlen(&fenc) ? &fenc : '(none)'}" " File format and encoding
+    let &statusline.=" %*"                                           " Reset color
+    "--------------------------------------------------------------------------
+    " Segment 3: File type (User3 color)
+    " - Displays the file type, limited to 20 characters (22 with spacers).
+    " - This accounts for long filetype names like 'upstreaminstalllog'.
+    "--------------------------------------------------------------------------
+    let &statusline.="%*"               " Switch to default highlight group
+    let &statusline.=" %.20{&filetype}" " Display filetype (max 20 chars)
+    let &statusline.=" %*"              " Reset color
+    "--------------------------------------------------------------------------
+    " Segment 4: Character info (Default color)
+    " - Shows decimal, hex, and octal values of the character under the cursor.
+    " - Notes:
+    "     * Maximum Unicode value is U+10FFFF (decimal 1114111).
+    "     * Maximum octal is 4177777.
+    "     * With octal, segment length is 34 characters (36 with spacers).
+    "     * Without octal, segment length is 22 characters (24 with spacers).
+    "     * Total segment length is either 34 or 56 characters (36 or 58 with
+    "       spacers).
+    "--------------------------------------------------------------------------
+    let &statusline.="%*"                                                       " Switch to default color
+    let &statusline.=" d=%-2b"                                                  " Decimal character code
+    "let &statusline.=" ┃"                                                      " Vertical separator
+    let &statusline.=" 0x%-2B"                                                  " Hex character code
+    "let &statusline.=" ┃"                                                      " Vertical separator
+    let &statusline.=" 0%{printf('%-2o', char2nr(getline('.')[col('.') - 1]))}" " Octal character code
+    "let &statusline.=" %*"                                                     " Reset color
+    let &statusline.="%*%=" " Right-align following content
+    "--------------------------------------------------------------------------
+    " Append the ruler to the statusline if it is enabled.
+    "--------------------------------------------------------------------------
+    if &ruler                                   " Check if ruler option is enabled
+      let &statusline.=&rulerformat             " Append rulerformat to statusline
+    endif
+  endfunc                                       " End of StatusLine function
+  call s:StatusLine()                           " Set initial statusline configuration
+  if has('autocmd')                             " Check if autocommands are available
+    autocmd OptionSet ruler call s:StatusLine() " Update statusline when ruler changes
+  endif
+endif                                           " End of initial if condition
 
 " ==================================================
 " Snippets
@@ -584,10 +329,10 @@ function! FormatMarkdownTable()
   " Process each line into columns
   for line in lines
 
-    " Skip empty lines
-    if line =~ '^\s*$'
-      continue
-    endif
+    "" Skip empty lines
+    "if line =~ '^\s*$'
+    "  continue
+    "endif
 
     " Split line by 4 or more spaces
     let columns = split(line, '\s\{4,\}')
@@ -691,4 +436,4 @@ endfunction
 
 " Define commands for Markdown files
 autocmd FileType markdown command! FormatTable call FormatMarkdownTable()
-"autocmd FileType markdown command! Reformat call ReformatMarkdownTables()
+"autocmd FileType markdown command! Reformat call ReformatMarkdownTables() " Down for maintenance
