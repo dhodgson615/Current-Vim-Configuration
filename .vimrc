@@ -92,8 +92,8 @@ if has('statusline') && &t_Co > 2 || has('gui_running')
   " Define the statusline function. This function assembles various segments
   " with different colors and content.
   "----------------------------------------------------------------------------
-  func s:StatusLine()                      " Define statusline function
-    set statusline=                      " Reset statusline to empty
+  func s:StatusLine() " Define statusline function
+    set statusline=   " Reset statusline to empty
     "--------------------------------------------------------------------------
     " Segment 1: Full file path with optional flags (User1 color)
     " - Limits filename display to ~65 characters.
