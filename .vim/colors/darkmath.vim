@@ -28,15 +28,15 @@ highlight CursorColumn guibg=#2a2a2a ctermbg=236             " Same for current 
 highlight Visual       guibg=#444444 ctermbg=238             " Subtle visual selection
 
 " Menus & Status Bar
-highlight Pmenu       guibg=#2a2a2a ctermbg=236  " Popup menu background
-highlight PmenuSel    guibg=#505050 ctermbg=244  " Selected menu item
-highlight StatusLine  guibg=#3a3a3a ctermbg=238  " Status line with moderate contrast
-highlight VertSplit   guifg=#3a3a3a ctermfg=238  " Subtle split line
+highlight Pmenu        guibg=#2a2a2a ctermbg=236  " Popup menu background
+highlight PmenuSel     guibg=#505050 ctermbg=244  " Selected menu item
+highlight StatusLine   guibg=#3a3a3a ctermbg=238  " Status line with moderate contrast
+highlight VertSplit    guifg=#3a3a3a ctermfg=238  " Subtle split line
 
 " Helper Elements
-highlight NonText     guifg=#404040 guibg=NONE ctermfg=239  " Non-text characters
-highlight Folded      guifg=#707070 guibg=NONE ctermfg=244  " Folded text markers
-highlight SpecialKey  guifg=#404040 guibg=NONE ctermfg=239  " Dimmed special keys
+highlight NonText      guifg=#404040 guibg=NONE ctermfg=239  " Non-text characters
+highlight Folded       guifg=#707070 guibg=NONE ctermfg=244  " Folded text markers
+highlight SpecialKey   guifg=#404040 guibg=NONE ctermfg=239  " Dimmed special keys
 
 " Code Hierarchy Linking (for consistency)
 highlight! link Directory Identifier  " Directories styled like variables (italicized)
